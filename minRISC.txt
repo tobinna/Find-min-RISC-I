@@ -1,0 +1,34 @@
+.code
+add r0, #4, r3              ; int inp_int = 4
+
+public min                  ; The min function
+min: 
+    add r26, r0, r1         ; v = a
+    sub r27, r1, r0,{C}     ; if v > b
+    jge min0                ;   go min0
+    xor r0, r0, r0          ; nop
+    add r27, r0, r1         ;   v = b 
+min0:
+    sub r28, r1, r0,{C}     ; if v > c
+    jge min1                ;   go min1
+    xor r0, r0, r0          ; nop
+    add r28, r0, r1         ;   v = c 
+min1:
+    ret r25, 0              ; return
+    xor r0, r0, r0          ; nop
+
+
+public min5                 ; min5 function
+min5:
+    add r3, r0, r10         ; inp_int passed into function
+    add r26, r0, r11        ; i passed into function
+    callr r25, min          ; call the min function with these 3 parameters
+    add r27, r0, r12        ; j to passed into function (using the delay)
+
+    add r1, r0, r10         ; result of function used as first parameter
+    add r28, r0, r11        ; k passed into function
+    callr r25, min          ; call the min function with these 3 parameters
+    add r29, r0, r12        ; l passed into function (using the delay)
+
+    ret r25, 0              ; return
+    xor r0, r0, r0          ; nop
